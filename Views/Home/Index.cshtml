@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h1>字体图标</h1>
+<i class="fa fa-camera-retro" style="font-size:60;color:red;"></i>
+<h1>常规表单</h1>
+<form id="normal-form">
+    <div class="form-group">
+        <label>邮箱</label>
+        <div class="form-inline">
+            <input type="text" class="form-control" name="email-normal-form"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>密码</label>
+        <input type="text" class="form-control" name="pwd-normal-form" />
+    </div>
+    <button type="submit" class="btn btn-primary">提交</button>
+    <button type="reset" class="btn btn-warning">重置</button>
+</form>
+
+
+<h1>内联表单</h1>
+<form class="form-inline" id="inner-form">
+    <div class="form-group">
+        <label>邮箱</label>
+        <input type="text" class="form-control" name="email-inner-form" />
+    </div>
+    <div class="form-group">
+        <label>密码</label>
+        <input type="text" class="form-control" name="pwd-inner-form" />
+    </div>
+    <button type="submit" class="btn btn-primary">提交</button>
+</form>
+
+<h1>内联表单-Addon</h1>
+<form class="form-inline" id="inner-form-addon">
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-addon">$</div>
+            <input type="text" class="form-control" name="amount" />
+            <div class="input-group-addon">.00</div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">提交</button>
+</form>
+

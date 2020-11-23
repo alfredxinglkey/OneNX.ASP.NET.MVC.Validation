@@ -35,6 +35,10 @@ input.has-error {
     background-color: red;
 }
 
-.tooltip-arrow {
-    background-color: red;
+.tooltip.top .tooltip-arrow {
+    border-top-color: red;
+}
+
+.form-control.error {
+    border: 1px solid red;
 }

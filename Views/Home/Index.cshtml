@@ -22,45 +22,62 @@
                             $element.data("title", "").removeClass("error").tooltip("destroy");
                         });
 
-                        $.each(errorList, function (index, error) {
-                            var $element = $(error.element);
-                            $element.tooltip("destroy").data("title", error.message).addClass("error").tooltip();
-                        });
-                    },
-                    success: function (label, element) {
-                        label.addClass("valid").text("Ok!");
-                    },
-                    messages: {
-                        "email-normal-form": {
-                            required: "必填项",
-                        },
-                        "pwd-normal-form": {
-                            required: "必填项",
-                        },
+@section Scripts{
+<script>
+    $(function () {
+        $("#normal-form").validate(
+            {
+                onkeyup: function (element, event) {
+                    $(element).valid();
+                },
+                onfocusout: function (element, event) {
+                    $(element).valid();
+                },
+                rules: {
+                    "email-normal-form": { required: true, },
+                    "pwd-normal-form": { required: true, },
+                },
+                showErrors: function (errorMap, errorList) {
+                    var stutas = '<span class="glyphicon glyphicon-ok form-control-feedback"></span>';
+                    $.each(this.validElements(), function (index, element) {
+                        var $element = $(element);
+                        $element.data("title", "").removeClass("error").tooltip("destroy");
+                        $element.after($(stutas));
+                        $element.closest(".form-group").addClass("has-success has-feedback");
+                    });
 
+                    $.each(errorList, function (index, error) {
+                        var $element = $(error.element);
+                        $element.tooltip("destroy").data("title", error.message).addClass("error").tooltip();
+                    });
+                },
+                messages: {
+                    "email-normal-form": {
+                        required: "必填项",
+                    },
+                    "pwd-normal-form": {
+                        required: "必填项",
                     },
 
+                },
+                success: function (label) {
                 }
-            );
-        });
-        $(function () {
-            let selects = $("select .form-control");
-            $.each(selects, function (item, index) {
-                
-            });
-        });
-    </script>
+            }
+        );
+    });
+</script>
 }
 
 <h1>字体图标</h1>
-<i class="fa fa-camera-retro" style="font-size:60;color:red;"></i>
+<i class="fa fa-camera-retro" style="font-size:60px;color:red;"></i>
 
 <h1>常规表单</h1>
 <form id="normal-form">
     <div class="form-group">
         <label>邮箱</label>
         <div class="form-inline">
-            <input type="text" id="test" class="form-control" name="email-normal-form" />
+            <input type="text" class="form-control" name="email-normal-form"/>
+            @*<span class="glyphicon glyphicon-ok form-control-feedback"></span>*@
         </div>
     </div>
     <div class="form-group">

@@ -21,6 +21,7 @@ namespace OneNX.ASP.NET.MVC.Validation
 
 			bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
 						 "~/Scripts/bootstrap.js",
+						 "~/Scripts/fileinput.js",
 						 "~/Scripts/bootstrap-select.js"));
 
 			bundles.Add(new StyleBundle("~/Content/css").Include(

@@ -1,15 +1,66 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@section Scripts{
+    <script>
+        $(function () {
+            $("#normal-form").validate(
+                {
+                    onkeyup: function (element, event) {
+                        $(element).valid();
+                    },
+                    onfocusout: function (element, event) {
+                        $(element).valid();
+                    },
+                    rules: {
+                        "email-normal-form": { required: true, },
+                        "pwd-normal-form": { required: true, },
+                    },
+                    showErrors: function (errorMap, errorList) {
+                        $.each(this.validElements(), function (index, element) {
+                            var $element = $(element);
+                            $element.data("title", "").removeClass("error").tooltip("destroy");
+                        });
+
+                        $.each(errorList, function (index, error) {
+                            var $element = $(error.element);
+                            $element.tooltip("destroy").data("title", error.message).addClass("error").tooltip();
+                        });
+                    },
+                    success: function (label, element) {
+                        label.addClass("valid").text("Ok!");
+                    },
+                    messages: {
+                        "email-normal-form": {
+                            required: "必填项",
+                        },
+                        "pwd-normal-form": {
+                            required: "必填项",
+                        },
+
+                    },
+
+                }
+            );
+        });
+        $(function () {
+            let selects = $("select .form-control");
+            $.each(selects, function (item, index) {
+                
+            });
+        });
+    </script>
+}
 
 <h1>字体图标</h1>
 <i class="fa fa-camera-retro" style="font-size:60;color:red;"></i>
+
 <h1>常规表单</h1>
 <form id="normal-form">
     <div class="form-group">
         <label>邮箱</label>
         <div class="form-inline">
-            <input type="text" class="form-control" name="email-normal-form"/>
+            <input type="text" id="test" class="form-control" name="email-normal-form" />
         </div>
     </div>
     <div class="form-group">
@@ -19,7 +70,6 @@
     <button type="submit" class="btn btn-primary">提交</button>
     <button type="reset" class="btn btn-warning">重置</button>
 </form>
-
 
 <h1>内联表单</h1>
 <form class="form-inline" id="inner-form">
@@ -46,3 +96,13 @@
     <button type="submit" class="btn btn-primary">提交</button>
 </form>
 
+<h1>Select</h1>
+<form id="selectForm">
+    <div class="form-group" data-live-search="true">
+        <select class="form-control">
+            <option>Monday</option>
+            <option>Tuesday</option>
+            <option>Wesday</option>
+        </select>
+    </div>
+</form>

@@ -35,6 +35,6 @@ input.has-error {
     background-color: red;
 }
 
-.tooltip-arrow {
-    background-color: red;
+.tooltip.top .tooltip-arrow {
+    border-top-color: red;
 }

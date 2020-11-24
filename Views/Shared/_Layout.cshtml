@@ -41,50 +41,7 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
-<script>
-    $(function () {
-        $("#normal-form").validate(
-            {
-                onkeyup: function (element, event) {
-                    $(element).valid();
-                },
-                onfocusout: function (element, event) {
-                    $(element).valid();
-                },
-                rules: {
-                    "email-normal-form": { required: true, },
-                    "pwd-normal-form": { required: true, },
-                },
-                showErrors: function (errorMap, errorList) {
-                    $.each(this.validElements(), function (index, element) {
-                        var $element = $(element);
-                        $element.data("title", "").removeClass("error").tooltip("destroy");
-                    });
 
-                    $.each(errorList, function (index, error) {
-                        var $element = $(error.element);
-                        $element.tooltip("destroy").data("title", error.message).addClass("error").tooltip();
-                    });
-                },
-                messages: {
-                    "email-normal-form": {
-                        required: "必填项",
-                    },
-                    "pwd-normal-form": {
-                        required: "必填项",
-                    },
-
-                },
-                success: function (error, element) {
-
-                },
-            }
-        );
-    });
-
-
-
-</script>
 
 <script>
 </script>

@@ -1,5 +1,5 @@
 /*!
- * bootstrap-fileinput v5.1.3
+ * bootstrap-fileinput v4.5.3
  * http://plugins.krajee.com/file-input
  *
  * Krajee Explorer Font Awesome theme configuration for bootstrap-fileinput. 
@@ -7,36 +7,54 @@
  * font awesome assets and CSS are loaded on the page as well.
  *
  * Author: Kartik Visweswaran
- * Copyright: 2014 - 2020, Kartik Visweswaran, Krajee.com
+ * Copyright: 2014 - 2019, Kartik Visweswaran, Krajee.com
  *
  * Licensed under the BSD-3-Clause
  * https://github.com/kartik-v/bootstrap-fileinput/blob/master/LICENSE.md
  */
 (function ($) {
-    'use strict';
+    "use strict";
+    var teTagBef = '<tr class="file-preview-frame {frameClass}" id="{previewId}" data-fileindex="{fileindex}"' +
+        ' data-fileid="{fileid}" data-template="{template}"', teContent = '<td class="kv-file-content">\n';
     $.fn.fileinputThemes['explorer-fa'] = {
         layoutTemplates: {
-            footer: '<div class="file-details-cell">' +
-                '<div class="explorer-caption" title="{caption}">{caption}</div> ' + '{size}{progress}' +
-                '</div>' +
-                '<div class="file-actions-cell">{indicator} {actions}</div>',
+            preview: '<div class="file-preview {class}">\n' +
+            '    {close}' +
+            '    <div class="{dropClass}">\n' +
+            '    <table class="table table-bordered table-hover"><tbody class="file-preview-thumbnails">\n' +
+            '    </tbody></table>\n' +
+            '    <div class="clearfix"></div>' +
+            '    <div class="file-preview-status text-center text-success"></div>\n' +
+            '    <div class="kv-fileinput-error"></div>\n' +
+            '    </div>\n' +
+            '</div>',
+            footer: '<td class="file-details-cell"><div class="explorer-caption" title="{caption}">{caption}</div> ' +
+            '{size}{progress}</td><td class="file-actions-cell">{indicator} {actions}</td>',
             actions: '{drag}\n' +
-                '<div class="file-actions">\n' +
-                '    <div class="file-footer-buttons">\n' +
-                '        {upload} {download} {delete} {zoom} {other} ' +
-                '    </div>\n' +
-                '</div>',
+            '<div class="file-actions">\n' +
+            '    <div class="file-footer-buttons">\n' +
+            '        {upload} {download} {delete} {zoom} {other} ' +
+            '    </div>\n' +
+            '</div>',
+            zoomCache: '<tr style="display:none" class="kv-zoom-cache-theme"><td>' +
+            '<table class="kv-zoom-cache">{zoomContent}</table></td></tr>',
             fileIcon: '<i class="fa fa-file kv-caption-icon"></i> '
         },
+        previewMarkupTags: {
+            tagBefore1: teTagBef + '>' + teContent,
+            tagBefore2: teTagBef + ' title="{caption}">' + teContent,
+            tagAfter: '</td>\n{footer}</tr>\n'
+        },
         previewSettings: {
-            html: {width: '100px', height: '60px'},
-            text: {width: '100px', height: '60px'},
-            video: {width: 'auto', height: '60px'},
-            audio: {width: 'auto', height: '60px'},
-            flash: {width: '100%', height: '60px'},
-            object: {width: '100%', height: '60px'},
-            pdf: {width: '100px', height: '60px'},
-            other: {width: '100%', height: '60px'}
+            image: {height: "60px"},
+            html: {width: "100px", height: "60px"},
+            text: {width: "100px", height: "60px"},
+            video: {width: "auto", height: "60px"},
+            audio: {width: "auto", height: "60px"},
+            flash: {width: "100%", height: "60px"},
+            object: {width: "100%", height: "60px"},
+            pdf: {width: "100px", height: "60px"},
+            other: {width: "100%", height: "60px"}
         },
         frameClass: 'explorer-frame',
         fileActionSettings: {
@@ -49,8 +67,7 @@
             indicatorNew: '<i class="fa fa-plus-circle text-warning"></i>',
             indicatorSuccess: '<i class="fa fa-check-circle text-success"></i>',
             indicatorError: '<i class="fa fa-exclamation-circle text-danger"></i>',
-            indicatorLoading: '<i class="fa fa-hourglass text-muted"></i>',
-            indicatorPaused: '<i class="fa fa-pause text-info"></i>'
+            indicatorLoading: '<i class="fa fa-hourglass text-muted"></i>'
         },
         previewZoomButtonIcons: {
             prev: '<i class="fa fa-caret-left fa-lg"></i>',
@@ -64,7 +81,6 @@
         browseIcon: '<i class="fa fa-folder-open"></i>',
         removeIcon: '<i class="fa fa-trash"></i>',
         cancelIcon: '<i class="fa fa-ban"></i>',
-        pauseIcon: '<i class="fa fa-pause"></i>',
         uploadIcon: '<i class="fa fa-upload"></i>',
         msgValidationErrorIcon: '<i class="fa fa-exclamation-circle"></i> '
     };

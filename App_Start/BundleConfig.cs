@@ -20,12 +20,16 @@ namespace OneNX.ASP.NET.MVC.Validation
 							"~/Scripts/modernizr-*"));
 
 			bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-						 "~/Scripts/bootstrap.js",
-						 "~/Scripts/fileinput.js"));
+						 "~/Scripts/bootstrap.js"));
+
+			bundles.Add(new ScriptBundle("~/bundles/fileinput").Include(
+						 "~/Scripts/fileinput.js",
+						 "~/Scripts.locales/zh.js"));
 
 			bundles.Add(new StyleBundle("~/Content/css").Include(
 						 "~/Content/bootstrap.css",
 						 "~/Content/site.css",
+						 "~/Content/bootstrap-fileinput/css/fileinput.css",
 						 "~/Content/font-awesome.css"));
 		}
 	}

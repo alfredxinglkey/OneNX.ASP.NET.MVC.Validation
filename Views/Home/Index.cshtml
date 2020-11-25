@@ -44,6 +44,23 @@
                 }
             }
         );
+        $("#txt_file").fileinput({
+            dropZoneEnabled: false,
+            language: 'zh', //设置语言
+            //hideThumbnailContent: true, //
+            showPreview: false,
+            fileSizeGetter: true,
+            allowedFileExtensions: ['txt'],//接收的文件后缀
+            uploadUrl: "/Home/Upload",
+            //theme: "fa", // 主题设置
+            showUpload: true, // 不显示上传按钮，选择后直接上传
+            enctype: 'multipart/form-data',
+        });
+
+         //导入文件上传完成之后的事件
+        $("#txt_file").on("fileuploaded", function (event, data, previewId, index) {
+            console.log(data.response.fileName);
+        });
     });
 </script>
 }
@@ -92,3 +109,6 @@
     </div>
     <button type="submit" class="btn btn-primary">提交</button>
 </form>
+
+<h1>文件上传</h1>
+<input id="txt_file" name="txt_file" type="file" class="file-loading">

@@ -1,68 +1,12 @@
-﻿@{
+﻿@model List<OneNX.ASP.NET.MVC.Validation.Models.FileModel>
+
+@{
     ViewBag.Title = "Home Page";
 }
 
 @section Scripts{
-<script>
-    $(function () {
-        $("#normal-form").validate(
-            {
-                onkeyup: function (element, event) {
-                    $(element).valid();
-                },
-                onfocusout: function (element, event) {
-                    $(element).valid();
-                },
-                rules: {
-                    "email-normal-form": { required: true, },
-                    "pwd-normal-form": { required: true, },
-                },
-                showErrors: function (errorMap, errorList) {
-                    var stutas = '<span class="glyphicon glyphicon-ok form-control-feedback"></span>';
-                    $.each(this.validElements(), function (index, element) {
-                        var $element = $(element);
-                        $element.data("title", "").removeClass("error").tooltip("destroy");
-                        $element.after($(stutas));
-                        $element.closest(".form-group").addClass("has-success has-feedback");
-                    });
-
-                    $.each(errorList, function (index, error) {
-                        var $element = $(error.element);
-                        $element.tooltip("destroy").data("title", error.message).addClass("error").tooltip();
-                    });
-                },
-                messages: {
-                    "email-normal-form": {
-                        required: "必填项",
-                    },
-                    "pwd-normal-form": {
-                        required: "必填项",
-                    },
-
-                },
-                success: function (label) {
-                }
-            }
-        );
-        $("#txt_file").fileinput({
-            dropZoneEnabled: false,
-            language: 'zh', //设置语言
-            //hideThumbnailContent: true, //
-            showPreview: false,
-            fileSizeGetter: true,
-            allowedFileExtensions: ['txt'],//接收的文件后缀
-            uploadUrl: "/Home/Upload",
-            //theme: "fa", // 主题设置
-            showUpload: true, // 不显示上传按钮，选择后直接上传
-            enctype: 'multipart/form-data',
-        });
-
-         //导入文件上传完成之后的事件
-        $("#txt_file").on("fileuploaded", function (event, data, previewId, index) {
-            console.log(data.response.fileName);
-        });
-    });
-</script>
+    @Scripts.Render("~/bundles/dataTables")
+    @Scripts.Render("~/bundles/common")
 }
 
 <h1>字体图标</h1>
@@ -73,7 +17,7 @@
     <div class="form-group">
         <label>邮箱</label>
         <div class="form-inline">
-            <input type="text" class="form-control" name="email-normal-form"/>
+            <input type="text" class="form-control" name="email-normal-form" />
             @*<span class="glyphicon glyphicon-ok form-control-feedback"></span>*@
         </div>
     </div>
@@ -112,3 +56,37 @@
 
 <h1>文件上传</h1>
 <input id="txt_file" name="txt_file" type="file" class="file-loading">
+<br />
+<table class="table-bordered" id="onenxTable">
+    <thead>
+        <tr>
+            <th hidden>Id</th>
+            <th>FileName</th>
+            <th>UploadDate</th>
+            <th>Compute</th>
+            <th>Download</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td hidden>@item.FileId</td>
+                <td>@item.FileName</td>
+                <td>@item.UploadDate</td>
+                <td><button class="btn btn-primary" id="computeBtn" data-loading-text="Computing" onclick="Compute(this)">Compute</button></td>
+                <td>
+                    @if (item.SubrecipeGenStatus == "Success")
+                    {
+                        <button class="btn btn-success" id="downloadBtn" onclick="Download(this)">Download</button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-success disabled" disabled id="downloadBtn">Download</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
